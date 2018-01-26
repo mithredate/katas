@@ -1,0 +1,16 @@
+{
+    "name": "mithredate/hackerrank",
+    "description": "Hackerrank solutions",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mehrdad Hedayati",
+            "email": "mehrdad.hedayati@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    }
+}
