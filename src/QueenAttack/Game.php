@@ -82,15 +82,29 @@ class Game
 
     public function numberOfValidCellsToMoveUp()
     {
-        $numberOfMovesToUp = 0;
+        $numberOfMovesUpward = 0;
 
         for ($i = 1; $i <= $this->getBoardDimension() - $this->getQueenRow(); $i++) {
             if($this->board->hasObstacle($this->getQueenRow() + $i, $this->getQueenCol())) {
                 break;
             }
-            $numberOfMovesToUp++;
+            $numberOfMovesUpward++;
         }
 
-        return $numberOfMovesToUp;
+        return $numberOfMovesUpward;
+    }
+
+    public function numberOfValidCellsToMoveDown()
+    {
+        $numberOfMovesDownward = 0;
+
+        for ($i = 1; $i < $this->getQueenRow(); $i++) {
+            if($this->board->hasObstacle($this->getQueenRow() - $i, $this->getQueenCol())) {
+                break;
+            }
+            $numberOfMovesDownward++;
+        }
+
+        return $numberOfMovesDownward;
     }
 }
