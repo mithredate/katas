@@ -13,10 +13,10 @@ use PHPUnit\Framework\TestCase;
 class QueenTest extends TestCase
 {
 
-    public function testNewQueen()
+    public function testGetLocation()
     {
-        $queen = new Queen();
-        $this->assertInstanceOf(Queen::class, $queen);
+        $queen = new Queen(1, 3);
+        $this->assertEquals([1, 3], $queen->getLocation());
     }
 
 }
