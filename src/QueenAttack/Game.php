@@ -41,18 +41,31 @@ class Game
         $this->queen = $queen;
     }
 
-    public function getQueenLocationX()
+    public function getQueenRow()
     {
         return $this->queen->getRow();
     }
 
-    public function getQueenLocationY()
+    public function getQueenCol()
     {
         return $this->queen->getCol();
     }
 
     public function numberOfValidCellsToMoveRight()
     {
-        return 3;
+        $numberOfMovesToRight = 0;
+
+        $queenRow = $this->getQueenRow();
+        $queenCol = $this->getQueenCol();
+        $boardDimension = $this->getBoardDimension();
+        for ($i = 1; $i <= $boardDimension - $queenCol; $i++) {
+            if($this->board->hasObstacle($queenRow, $queenCol + $i)) {
+                break;
+            }
+            $numberOfMovesToRight++;
+        }
+
+        return $numberOfMovesToRight;
+
     }
 }
