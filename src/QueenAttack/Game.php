@@ -41,8 +41,18 @@ class Game
         $this->queen = $queen;
     }
 
-    public function getQueenLocation()
+    public function getQueenLocationX()
     {
-        return $this->queen->getLocation();
+        return $this->queen->getRow();
+    }
+
+    public function getQueenLocationY()
+    {
+        return $this->queen->getCol();
+    }
+
+    public function numberOfValidCellsToMoveRight()
+    {
+        return 3;
     }
 }

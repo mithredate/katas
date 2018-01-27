@@ -25,8 +25,13 @@ class Queen
         $this->col = $col;
     }
 
-    public function getLocation()
+    public function getRow()
     {
-        return [$this->row, $this->col];
+        return $this->row;
+    }
+
+    public function getCol()
+    {
+        return $this->col;
     }
 }
