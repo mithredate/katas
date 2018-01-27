@@ -55,11 +55,8 @@ class Game
     {
         $numberOfMovesToRight = 0;
 
-        $queenRow = $this->getQueenRow();
-        $queenCol = $this->getQueenCol();
-        $boardDimension = $this->getBoardDimension();
-        for ($i = 1; $i <= $boardDimension - $queenCol; $i++) {
-            if($this->board->hasObstacle($queenRow, $queenCol + $i)) {
+        for ($i = 1; $i <= $this->getBoardDimension() - $this->getQueenCol(); $i++) {
+            if($this->board->hasObstacle($this->getQueenRow(), $this->getQueenCol() + $i)) {
                 break;
             }
             $numberOfMovesToRight++;
@@ -67,5 +64,19 @@ class Game
 
         return $numberOfMovesToRight;
 
+    }
+
+    public function numberOfValidCellsToMoveLeft()
+    {
+        $numberOfMovesToLeft = 0;
+
+        for ($i = 1; $i < $this->getQueenCol(); $i++) {
+            if($this->board->hasObstacle($this->getQueenRow(), $this->getQueenCol() - $i)) {
+                break;
+            }
+            $numberOfMovesToLeft++;
+        }
+
+        return $numberOfMovesToLeft;
     }
 }
