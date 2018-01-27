@@ -121,4 +121,18 @@ class Game
 
         return $numberOfMovesOnPrimaryDiagonalUpward;
     }
+
+    public function numberOfValidCellsToMoveOnPrimaryDiagonalDownward()
+    {
+        $numberOfMovesOnPrimaryDiagonalDownward = 0;
+
+        for ($i = 1; $i <= $this->getQueenRow() && $i < $this->getBoardDimension() - $this->getQueenCol(); $i++) {
+            if($this->board->hasObstacle($this->getQueenRow() - $i, $this->getQueenCol() + $i)) {
+                break;
+            }
+            $numberOfMovesOnPrimaryDiagonalDownward++;
+        }
+
+        return $numberOfMovesOnPrimaryDiagonalDownward;
+    }
 }
