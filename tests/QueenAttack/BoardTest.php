@@ -29,7 +29,9 @@ class BoardTest extends TestCase
 
     public function testAddObstacle()
     {
-        $this->board->addObstacle(m::mock(Obstacle::class));
+        $this->board->addObstacle(m::mock(Obstacle::class, function ($mock) {
+            $mock->shouldReceive('isLocatedAt')->withArgs([1, 3])->once()->andReturn(true);
+        }));
 
         $this->assertTrue($this->board->hasObstacle(1, 3));
     }

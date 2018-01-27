@@ -37,6 +37,12 @@ class Board
 
     public function hasObstacle($row, $col)
     {
-        return true;
+        foreach ($this->obstacles as $obstacle) {
+            if($obstacle->isLocatedAt($row, $col)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
