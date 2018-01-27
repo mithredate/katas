@@ -25,9 +25,7 @@ class GameTest extends TestCase
 
     public function testSetDimensionOnGame()
     {
-        $this->game->setBoard(m::mock(Board::class, function($mock) {
-            $mock->shouldReceive('getDimension')->once()->andReturn(8);
-        }));
+        $this->game->setBoard($this->getBoardMockWithDimension(8));
         $this->assertEquals(8, $this->game->getBoardDimension());
     }
 
@@ -41,9 +39,7 @@ class GameTest extends TestCase
 
     public function testMoveRightIn1CellGame()
     {
-        $this->game->setBoard(m::mock(Board::class, function ($mock) {
-            $mock->shouldReceive('getDimension')->once()->andReturn(1);
-        }));
+        $this->game->setBoard($this->getBoardMockWithDimension(1));
 
         $this->mockQueenAt(1, 1);
 
@@ -52,10 +48,9 @@ class GameTest extends TestCase
 
     public function testMoveRightIn8CellGameWithNoObstacles()
     {
-        $this->game->setBoard(m::mock(Board::class, function ($mock) {
-            $mock->shouldReceive('getDimension')->once()->andReturn(8);
-            $mock->shouldReceive('hasObstacle')->times(3)->withAnyArgs()->andReturn(false);
-        }));
+        $board = $this->getBoardMockWithDimension(8);
+        $board->shouldReceive('hasObstacle')->times(3)->withAnyArgs()->andReturn(false);
+        $this->game->setBoard($board);
 
         $this->mockQueenAt(6, 5);
 
@@ -66,11 +61,10 @@ class GameTest extends TestCase
     {
         $this->mockQueenAt(2, 2);
 
-        $this->game->setBoard(m::mock(Board::class, function($mock) {
-            $mock->shouldReceive('getDimension')->once()->andReturn(8);
-            $mock->shouldReceive('hasObstacle')->once()->withArgs([2, 5])->andReturn(true);
-            $mock->shouldReceive('hasObstacle')->times(5)->withAnyArgs()->andReturn(false);
-        }));
+        $board = $this->getBoardMockWithDimension(8);
+        $board->shouldReceive('hasObstacle')->once()->withArgs([2, 5])->andReturn(true);
+        $board->shouldReceive('hasObstacle')->times(5)->withAnyArgs()->andReturn(false);
+        $this->game->setBoard($board);
 
         $this->assertEquals(2, $this->game->numberOfValidCellsToMoveRight());
     }
@@ -85,6 +79,19 @@ class GameTest extends TestCase
             $mock->shouldReceive('getRow')->once()->andReturn($row);
             $mock->shouldReceive('getCol')->once()->andReturn($col);
         }));
+    }
+
+    /**
+     * @param $dimension
+     *
+     * @return m\MockInterface
+     */
+    private function getBoardMockWithDimension($dimension): m\MockInterface
+    {
+        return m::mock(Board::class, function($mock) use ($dimension) {
+            $mock->shouldReceive('getDimension')->once()->andReturn($dimension);
+
+        });
     }
 
 }
