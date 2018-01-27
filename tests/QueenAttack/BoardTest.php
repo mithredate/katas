@@ -8,15 +8,30 @@
 namespace Mithredate\Hackerrank\QueenAttack;
 
 
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 class BoardTest extends TestCase
 {
 
+    private $board;
+
+
+    protected function setUp()
+    {
+        $this->board = new Board(8);
+    }
+
     public function testNewBoardDimension()
     {
-        $board = new Board(8);
-        $this->assertEquals($board->getDimension(), 8);
+        $this->assertEquals($this->board->getDimension(), 8);
+    }
+
+    public function testAddObstacle()
+    {
+        $this->board->addObstacle(m::mock(Obstacle::class));
+
+        $this->assertTrue($this->board->hasObstacle(1, 3));
     }
 
 }

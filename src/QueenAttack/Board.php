@@ -10,9 +10,7 @@ namespace Mithredate\Hackerrank\QueenAttack;
 
 class Board
 {
-    /**
-     * @var int
-     */
+    private $obstacles;
     private $dimension;
 
     /**
@@ -24,10 +22,21 @@ class Board
     {
 
         $this->dimension = $dimension;
+        $this->obstacles = [];
     }
 
     public function getDimension()
     {
         return $this->dimension;
+    }
+
+    public function addObstacle(Obstacle $obstacle)
+    {
+        $this->obstacles[] = $obstacle;
+    }
+
+    public function hasObstacle($row, $col)
+    {
+        return true;
     }
 }
