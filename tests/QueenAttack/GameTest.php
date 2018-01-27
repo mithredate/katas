@@ -13,13 +13,29 @@ use PHPUnit\Framework\TestCase;
 class GameTest extends TestCase
 {
 
+    /**
+     * @var Game
+     */
+    private $game;
+
+    protected function setUp()
+    {
+        $this->game = new Game();
+    }
+
     public function testSetDimensionOnGame()
     {
-        $game = new Game();
-        $game->setBoard(m::mock(Board::class, function($mock) {
+        $this->game->setBoard(m::mock(Board::class, function($mock) {
             $mock->shouldReceive('getDimension')->once()->andReturn(8);
         }));
-        $this->assertEquals(8, $game->getBoardDimension());
+        $this->assertEquals(8, $this->game->getBoardDimension());
+    }
+
+    public function testSetQueen()
+    {
+        $this->game->setQueen(m::mock(Queen::class));
+
+        $this->assertEquals([4, 6], $this->game->getQueenLocation());
     }
 
 }

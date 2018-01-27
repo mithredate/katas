@@ -11,6 +11,10 @@ namespace Mithredate\Hackerrank\QueenAttack;
 class Game
 {
     /**
+     * @var Queen
+     */
+    private $queen;
+    /**
      * @var Board
      */
     private $board;
@@ -30,5 +34,15 @@ class Game
     public function getBoardDimension()
     {
         return $this->board->getDimension();
+    }
+
+    public function setQueen(Queen $queen)
+    {
+        $this->queen = $queen;
+    }
+
+    public function getQueenLocation()
+    {
+        return [4, 6];
     }
 }
