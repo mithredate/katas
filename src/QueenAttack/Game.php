@@ -163,4 +163,18 @@ class Game
 
         return $numberOfMovesOnSecondaryDiagonalDownward;
     }
+
+    public function numberOfMoves()
+    {
+        $totalNumberOfMoves = 0;
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveLeft();
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveRight();
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveUp();
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveDown();
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveOnPrimaryDiagonalUpward();
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveOnPrimaryDiagonalDownward();
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveOnSecondaryDiagonalUpward();
+        $totalNumberOfMoves += $this->numberOfValidCellsToMoveOnSecondaryDiagonalDownward();
+        return $totalNumberOfMoves;
+    }
 }

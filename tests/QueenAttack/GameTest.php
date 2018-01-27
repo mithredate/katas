@@ -230,6 +230,15 @@ class GameTest extends TestCase
         $this->assertEquals(2, $this->game->numberOfValidCellsToMoveOnSecondaryDiagonalDownward());
     }
 
+    public function testNumberOfTotalValidMovesOn1CellBoard()
+    {
+        $this->mockQueenAt(1, 1);
+
+        $this->game->setBoard($this->getBoardMockWithDimension(1));
+
+        $this->assertEquals(0, $this->game->numberOfMoves());
+    }
+
     /**
      * @param $row
      * @param $col
