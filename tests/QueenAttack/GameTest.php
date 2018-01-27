@@ -126,6 +126,18 @@ class GameTest extends TestCase
         $this->assertEquals(4, $this->game->numberOfValidCellsToMoveDown());
     }
 
+    public function testMoveDownWithObstacle()
+    {
+        $this->mockQueenAt(4, 5);
+
+        $board = $this->getBoardMockWithDimension(8);
+        $board->shouldReceive('hasObstacle')->once()->withArgs([3, 5])->andReturn(true);
+        $board->shouldReceive('hasObstacle')->times(2)->withAnyArgs()->andReturn(false);
+        $this->game->setBoard($board);
+
+        $this->assertEquals(0, $this->game->numberOfValidCellsToMoveDown());
+    }
+
     /**
      * @param $row
      * @param $col
