@@ -33,7 +33,9 @@ class GameTest extends TestCase
 
     public function testSetQueen()
     {
-        $this->game->setQueen(m::mock(Queen::class));
+        $this->game->setQueen(m::mock(Queen::class, function ($mock) {
+            $mock->shouldReceive('getLocation')->once()->andReturn([4, 6]);
+        }));
 
         $this->assertEquals([4, 6], $this->game->getQueenLocation());
     }

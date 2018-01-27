@@ -43,6 +43,6 @@ class Game
 
     public function getQueenLocation()
     {
-        return [4, 6];
+        return $this->queen->getLocation();
     }
 }
