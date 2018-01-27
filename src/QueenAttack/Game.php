@@ -79,4 +79,18 @@ class Game
 
         return $numberOfMovesToLeft;
     }
+
+    public function numberOfValidCellsToMoveUp()
+    {
+        $numberOfMovesToUp = 0;
+
+        for ($i = 1; $i <= $this->getBoardDimension() - $this->getQueenRow(); $i++) {
+            if($this->board->hasObstacle($this->getQueenRow() + $i, $this->getQueenCol())) {
+                break;
+            }
+            $numberOfMovesToUp++;
+        }
+
+        return $numberOfMovesToUp;
+    }
 }
