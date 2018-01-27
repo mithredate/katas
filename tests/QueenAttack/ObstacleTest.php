@@ -13,10 +13,10 @@ use PHPUnit\Framework\TestCase;
 class ObstacleTest extends TestCase
 {
 
-    public function testCreateInstance()
+    public function testLocatedAt()
     {
-        $obstacle = new Obstacle();
-        $this->assertInstanceOf(Obstacle::class, $obstacle);
+        $obstacle = new Obstacle(1, 3);
+        $this->assertTrue($obstacle->isLocatedAt(1, 3));
     }
 
 }
