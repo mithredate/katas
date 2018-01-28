@@ -247,7 +247,7 @@ class GameTest extends TestCase
         $board->shouldReceive('hasObstacle')->times(24)->withAnyArgs()->andReturn(false);
         $this->game->setBoard($board);
 
-        $this->assertEquals(24, $this->game->numberOfMoves());
+        $this->assertEquals(25, $this->game->numberOfMoves());
     }
 
     public function testComplex5X5GameWithObstacles()
@@ -262,6 +262,31 @@ class GameTest extends TestCase
         $this->game->setBoard($board);
 
         $this->assertEquals(10, $this->game->numberOfMoves());
+    }
+
+    public function testAnotherComplex5X5GameWithObstacles()
+    {
+        $this->mockQueenAt(4, 3);
+
+        $board = $this->getBoardMockWithDimension(5);
+        $board->shouldReceive('hasObstacle')->withArgs([2, 3])->andReturn(true);
+        $board->shouldReceive('hasObstacle')->withArgs([4, 2])->andReturn(true);
+        $board->shouldReceive('hasObstacle')->withArgs([5, 5])->andReturn(true);
+        $board->shouldReceive('hasObstacle')->times(10)->withAnyArgs()->andReturn(false);
+        $this->game->setBoard($board);
+
+        $this->assertEquals(10, $this->game->numberOfMoves());
+    }
+
+    public function testOn8CellBoardWithNoObstacles()
+    {
+        $this->mockQueenAt(1, 1);
+
+        $board = $this->getBoardMockWithDimension(8);
+        $board->shouldReceive('hasObstacle')->times(21)->withAnyArgs()->andReturn(false);
+        $this->game->setBoard($board);
+
+        $this->assertEquals(21, $this->game->numberOfMoves());
     }
 
     /**
