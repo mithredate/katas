@@ -38,16 +38,22 @@ class HackerLand
     {
         $this->roads[] = $road;
 
-        $road->getFrom()->addAdjacentCity($road->getTo());
-        $road->getTo()->addAdjacentCity($road->getFrom());
+        $from = $road->getFrom();
+        $to = $road->getTo();
+        $from->addAdjacentCity($to);
+        $to->addAdjacentCity($from);
 
         $groupFound = false;
         for ($group = 0; $group < sizeof($this->adjacentCities); $group++) {
-            if(in_array($road->getFrom(), $this->adjacentCities[$group])) {
-                $this->adjacentCities[$group][] = $road->getTo();
+            $fromIsAlreadyInTheGroup = array_key_exists($from->getNumber(), $this->adjacentCities[$group]);
+            $toIsAlreadyInTheGroup = array_key_exists($to->getNumber(), $this->adjacentCities[$group]);
+            if($fromIsAlreadyInTheGroup && $toIsAlreadyInTheGroup) {
                 $groupFound = true;
-            } elseif(in_array($road->getTo(), $this->adjacentCities[$group])) {
-                $this->adjacentCities[$group][] = $road->getFrom();
+            } elseif($fromIsAlreadyInTheGroup) {
+                $this->adjacentCities[$group][$to->getNumber()] = $to;
+                $groupFound = true;
+            } elseif($toIsAlreadyInTheGroup) {
+                $this->adjacentCities[$group][$from->getNumber()] = $from;
                 $groupFound = true;
             }
 
@@ -57,7 +63,7 @@ class HackerLand
         }
 
         if(! $groupFound) {
-            $this->adjacentCities[] = [$road->getFrom(), $road->getTo()];
+            $this->adjacentCities[] = [$from->getNumber() => $from, $to->getNumber() => $to];
         }
 
     }
