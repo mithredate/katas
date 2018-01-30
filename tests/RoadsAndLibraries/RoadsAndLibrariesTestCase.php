@@ -11,7 +11,7 @@ namespace Mithredate\Hackerrank\RoadsAndLibraries;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
-class RoadAndLibrariesTestCase extends TestCase
+class RoadsAndLibrariesTestCase extends TestCase
 {
 
     /**

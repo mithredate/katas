@@ -9,7 +9,7 @@ namespace Mithredate\Hackerrank\RoadsAndLibraries;
 
 use Mockery as m;
 
-class HackerLandTest extends RoadAndLibrariesTestCase
+class HackerLandTest extends RoadsAndLibrariesTestCase
 {
     public function testHackerLandCities()
     {
