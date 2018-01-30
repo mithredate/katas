@@ -46,12 +46,13 @@ class LibraryBuilderTest extends RoadsAndLibrariesTestCase
         $city8 = $this->getCityMockWithNumber(8);
 
         $hackerLand->shouldReceive('getAdjacentCities')->once()->andReturn([
-            [1 => $city1, 2 => $city2, 3 => $city3, 7 => $city7],
-            [5 => $city5, 6 => $city6, 8 => $city8]
+            0 => [1 => $city1, 2 => $city2, 3 => $city3, 7 => $city7],
+            4 => [5 => $city5, 6 => $city6, 8 => $city8],
+            3 => [4 => $city4]
         ]);
 
         $libraryBuilder = new LibraryBuilder($hackerLand, 5, 2);
 
-        $this->assertEquals(20, $libraryBuilder->getTotalCost());
+        $this->assertEquals(25, $libraryBuilder->getTotalCost());
     }
 }
