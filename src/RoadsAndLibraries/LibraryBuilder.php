@@ -34,14 +34,17 @@ class LibraryBuilder
 
     public function getTotalCost()
     {
-        $adjacentCities = $this->hackerLand->getAdjacentCities();
-
         $libraries = 0;
         $roads = 0;
+        if($this->libCost < $this->roadCost) {
+            $libraries = count($this->hackerLand->getCities());
+        } else {
+            $adjacentCities = $this->hackerLand->getAdjacentCities();
 
-        foreach ($adjacentCities as $group) {
-            $roads += sizeof($group) - 1;
-            $libraries++;
+            foreach ($adjacentCities as $group) {
+                $roads += sizeof($group) - 1;
+                $libraries++;
+            }
         }
 
         return $libraries * $this->libCost + $roads * $this->roadCost;

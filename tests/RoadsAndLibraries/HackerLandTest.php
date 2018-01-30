@@ -76,4 +76,28 @@ class HackerLandTest extends RoadsAndLibrariesTestCase
 
         $this->assertEquals([[1 => $city1, 2 => $city2, 3 => $city3, 7 => $city7], [5 => $city5, 6 => $city6, 8 => $city8]], $hackerLand->getAdjacentCities());
     }
+
+    public function testGetCities()
+    {
+        $city1 = $this->getCityMockWithNumber(1);
+        $city2 = $this->getCityMockWithNumber(2);
+        $city3 = $this->getCityMockWithNumber(3);
+        $city4 = $this->getCityMockWithNumber(4);
+        $city5 = $this->getCityMockWithNumber(5);
+        $city6 = $this->getCityMockWithNumber(6);
+        $city7 = $this->getCityMockWithNumber(7);
+        $city8 = $this->getCityMockWithNumber(8);
+
+        $hackerLand = new HackerLand();
+        $hackerLand->addCity($city1);
+        $hackerLand->addCity($city2);
+        $hackerLand->addCity($city3);
+        $hackerLand->addCity($city4);
+        $hackerLand->addCity($city5);
+        $hackerLand->addCity($city6);
+        $hackerLand->addCity($city7);
+        $hackerLand->addCity($city8);
+
+        $this->assertEquals([$city1, $city2, $city3, $city4, $city5, $city6, $city7, $city8], $hackerLand->getCities());
+    }
 }

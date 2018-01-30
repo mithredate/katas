@@ -67,4 +67,9 @@ class HackerLand
         }
 
     }
+
+    public function getCities()
+    {
+        return $this->cities;
+    }
 }
