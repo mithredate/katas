@@ -24,9 +24,10 @@ class HackerLand
         $this->adjacentCities = [];
     }
 
-    public function addCity($city)
+    public function addCity(City $city)
     {
         $this->cities[] = $city;
+        $this->adjacentCities[] = [$city->getNumber() => $city];
     }
 
     public function getAdjacentCities()
@@ -43,29 +44,26 @@ class HackerLand
         $from->addAdjacentCity($to);
         $to->addAdjacentCity($from);
 
-        $groupFound = false;
-        for ($group = 0; $group < sizeof($this->adjacentCities); $group++) {
-            $fromIsAlreadyInTheGroup = array_key_exists($from->getNumber(), $this->adjacentCities[$group]);
-            $toIsAlreadyInTheGroup = array_key_exists($to->getNumber(), $this->adjacentCities[$group]);
-            if($fromIsAlreadyInTheGroup && $toIsAlreadyInTheGroup) {
-                $groupFound = true;
-            } elseif($fromIsAlreadyInTheGroup) {
-                $this->adjacentCities[$group][$to->getNumber()] = $to;
-                $groupFound = true;
-            } elseif($toIsAlreadyInTheGroup) {
-                $this->adjacentCities[$group][$from->getNumber()] = $from;
-                $groupFound = true;
-            }
+        $fromGroup = 0;
+        $toGroup = 0;
 
-            if($groupFound) {
-                break;
+        foreach ($this->adjacentCities as $group => $adjacentCity) {
+            if(array_key_exists($from->getNumber(), $adjacentCity)) {
+                $fromGroup = $group;
+            }
+            if(array_key_exists($to->getNumber(), $adjacentCity)) {
+                $toGroup = $group;
             }
         }
 
-        if(! $groupFound) {
-            $this->adjacentCities[] = [$from->getNumber() => $from, $to->getNumber() => $to];
+        if($fromGroup == $toGroup) {
+        } elseif(sizeof($this->adjacentCities[$fromGroup]) >= sizeof($this->adjacentCities[$toGroup])) {
+            $this->adjacentCities[$fromGroup][$to->getNumber()] = $to;
+            unset($this->adjacentCities[$toGroup]);
+        } else {
+            $this->adjacentCities[$toGroup][$from->getNumber()] = $from;
+            unset($this->adjacentCities[$fromGroup]);
         }
-
     }
 
     public function getCities()
